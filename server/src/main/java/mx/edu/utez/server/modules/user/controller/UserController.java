@@ -9,7 +9,7 @@ import mx.edu.utez.server.utils.APIResponse;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
   private final UserService service;
@@ -28,14 +28,12 @@ public class UserController {
     return new ResponseEntity<>(res, res.getStatus());
   }
 
-  // Crear o actualizar con un solo DTO:
   @PostMapping("")
   public ResponseEntity<APIResponse> createOrUpdate(@RequestBody UserDto payload) {
     APIResponse res = service.saveOrUpdate(payload);
     return new ResponseEntity<>(res, res.getStatus());
   }
 
-  // Si quieres endpoint explícito para update, llama al mismo servicio:
   @PutMapping("")
   public ResponseEntity<APIResponse> update(@RequestBody UserDto payload) {
     APIResponse res = service.saveOrUpdate(payload);

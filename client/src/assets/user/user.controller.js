@@ -9,10 +9,16 @@ UserController.getAll = async () => {
   try {
     const res = await fetch(`${API_URL}`, {
       method: 'GET',
-      headers: { 'Accept': 'application/json' },
+      headers: { 
+        'Accept': 'application/json' 
+      },
     });
+
+    if (!res.ok) {
+      console.error('getAll: response not ok', res.status, await res.text());
+      throw new Error(`HTTP ${res.status}`);
+    }
     const data = await res.json();
-    console.log('Usuarios:', data);
     return data;
   } catch (error) {
     console.error('Error al obtener usuarios:', error);

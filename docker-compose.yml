@@ -1,57 +1,60 @@
+version: '3.8'
 services:
   database:
     image: mysql:8
-    container_name: sju-database
+    container_name: sgu-database
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: sju-hra
+      MYSQL_DATABASE: sgu_db
     ports:
       - "3307:3306"
     volumes:
-      - sju-volume:/var/lib/mysql
+      - sgu-volume:/var/lib/mysql
     networks:
-      - sju-net
+      - sgu-net
     restart: unless-stopped
 
-  frontend:
-    image: client:latest
-    build:
-      context: ./client
-      args:
-        API_HOST: localhost
-        API_PORT: 8081
-        API_BASE: /sju-api
-    container_name: sju-client
-    ports:
-      - "3000:80"
-    networks:
-      - sju-net
-    depends_on:
-      - database
-
   backend:
-    image: server:latest
-    build: 
+    image: server:1.0-sgu
+    build:
       context: ./server
     environment:
       SERVER_PORT: 8080
       DB_HOST: database
       DB_PORT: 3306
-      DB_NAME: sju-hra
+      DB_NAME: sgu_db
       DB_USER: root
       DB_PASS: root
-    container_name: sju-server
+    container_name: sgu-backend
     ports:
       - "8081:8080"
     networks:
-      - sju-net
+      - sgu-net
     depends_on:
-      - frontend
+      - database
+
+  frontend:
+    image: client:1.0-sgu
+    build:
+      context: ./client
+      args:
+      
+        API_HOST: localhost 
+        API_PORT: 8081  
+        API_BASE: /api/user
+    container_name: sgu-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - sgu-net
+    depends_on:
+      - backend
 
 volumes:
-  sju-volume:
-    external: true
+  sgu-volume:
+    name: sgu-volume
 
 networks:
-  sju-net:
+  sgu-net:
     external: true
+    name: sgu-net

@@ -6,7 +6,7 @@
         stage('Parando los servicios...') {
             steps {
                 bat '''
-                    docker compose -p adj-demo down || exit /b 0
+                    docker compose -p sgu-hra-10a down || exit /b 0
                 '''
             }
         }
@@ -15,7 +15,7 @@
         stage('Eliminando imágenes anteriores...') {
             steps {
                 bat '''
-                    for /f "tokens=*" %%i in ('docker images --filter "label=com.docker.compose.project=adj-demo" -q') do (
+                    for /f "tokens=*" %%i in ('docker images --filter "label=com.docker.compose.project=sgu-hra-10a" -q') do (
                         docker rmi -f %%i
                     )
                     if errorlevel 1 (
