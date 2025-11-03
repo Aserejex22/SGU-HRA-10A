@@ -57,8 +57,7 @@ export default function UsersPage() {
     <div className="app-container">
       {/* Header moderno */}
       <div className="app-header">
-        <h1 className="app-title">🚀 Sistema de Gestión</h1>
-        <p className="app-subtitle">Administración de usuarios • Diseño Cyberpunk</p>
+        <h1 className="app-title">SGU - HRA</h1>
       </div>
 
       {/* Alertas */}
