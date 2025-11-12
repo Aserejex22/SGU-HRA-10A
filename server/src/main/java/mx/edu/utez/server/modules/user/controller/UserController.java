@@ -9,7 +9,7 @@ import mx.edu.utez.server.utils.APIResponse;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "https://localhost:3000", allowCredentials = "true")
 public class UserController {
 
   private final UserService service;

@@ -2,7 +2,7 @@ const UserController = {};
 const ENV = import.meta.env;
 
 // Ejemplo: http://localhost:8080/api/user
-const API_URL = `http://${ENV.VITE_API_HOST}:${ENV.VITE_API_PORT}${ENV.VITE_API_BASE}`;
+const API_URL = `${ENV.VITE_API_PROTOCOL}://${ENV.VITE_API_HOST}:${ENV.VITE_API_PORT}${ENV.VITE_API_BASE}`;
 
 // Obtener todos los usuarios
 UserController.getAll = async () => {
